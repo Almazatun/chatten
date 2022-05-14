@@ -21,7 +21,6 @@ $ npm run start:prod
 ## Run app with docker-compose
 
 ```bash
-```bash
 # Build and Up
 $ docker-compose up --build
 

@@ -26,7 +26,7 @@ module.exports = {
     "no-await-in-loop": "off",
     "no-restricted-syntax": ["error", "WithStatement", "BinaryExpression[operator='in']"],
     "@typescript-eslint/no-shadow": ["error"],
-    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "quotes": ["error", "double", { "allowTemplateLiterals": true }],
     "arrow-body-style": ["error", "as-needed"],
     "implicit-arrow-linebreak": ["error", "beside"],
     "no-param-reassign": ["error", { "props": false }],

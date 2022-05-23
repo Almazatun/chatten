@@ -14,4 +14,4 @@ import { User } from "./entities/user.entity";
     UserRepo,
   ],
 })
-export class UserModule {}
+export class UsersModule {}

@@ -1,30 +1,10 @@
 import { Injectable } from "@nestjs/common";
 
-import { UserRepo } from "./user.repository";
+import { UsersRepo } from "./users.repository";
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(
-    private userRepository: UserRepo,
+    private usersRepository: UsersRepo,
   ) {}
-
-  create() {
-    return this.userRepository.save();
-  }
-
-  findAll() {
-    return this.userRepository.list();
-  }
-
-  findOne(id: string) {
-    return this.userRepository.findById(id);
-  }
-
-  update(id: string) {
-    return this.userRepository.update(id);
-  }
-
-  remove(id: string) {
-    return this.userRepository.delete(id);
-  }
 }

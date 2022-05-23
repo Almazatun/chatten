@@ -1,0 +1,14 @@
+export const SOCKET_EVENTS = {
+  JOIN_GROUP: "JOIN_ROOM",
+  LEAVE_GROUP: "JOIN_ROOM",
+  CREATE_GROUP: "CREATE_GROUP",
+  SEND_MESSAGE: "SEND_MESSAGE",
+};
+
+export const SOCKET_NAMESPACES = {
+  CHAT: "chat",
+};
+
+export const GATEWAY_LOGGER_NAMESPACES = {
+  CHAT: "ChatGateway",
+};

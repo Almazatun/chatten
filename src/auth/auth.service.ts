@@ -5,15 +5,15 @@ import * as bcrypt from "bcrypt";
 import { plainToClass } from "class-transformer";
 import { BadRequestExc } from "../common/exceptions/bad-request.exception";
 import { NotFoundExc } from "../common/exceptions/not-found.exception";
-import { UsersRepo } from "../users/users.repository";
+import { UserRepo } from "../user/user.repository";
 import { RegisterUserDto } from "./dto/register-user.dto";
-import { User } from "../users/entities/user.entity";
+import { User } from "../user/entities/user.entity";
 import { AuthUser, JwtPayload } from "./types";
 
 @Injectable()
 export class AuthService {
   constructor(
-    private usersRepository: UsersRepo,
+    private userRepository: UserRepo,
     private jwtService: JwtService,
   ) {}
 
@@ -21,7 +21,7 @@ export class AuthService {
     const { password, email } = registerUserDto;
 
     const [userDB, hashedPassword] = await Promise.all([
-      this.usersRepository.getByEmail(email),
+      this.userRepository.getByEmail(email),
       this.hashingPassword(password),
     ]);
 
@@ -34,13 +34,13 @@ export class AuthService {
       password: hashedPassword,
     });
 
-    await this.usersRepository.save(registerUserDBType);
+    await this.userRepository.save(registerUserDBType);
 
     return `User successfully registered with email:${email}`;
   }
 
   public async validateUser(email: string, password: string): Promise<AuthUser | void> {
-    const userDB = await this.usersRepository.getByEmail(email);
+    const userDB = await this.userRepository.getByEmail(email);
 
     if (userDB !== null && userDB !== undefined) {
       const token = this.jwtService.sign(this.createJwtPayload(userDB));

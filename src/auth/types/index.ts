@@ -1,11 +1,11 @@
-export interface AuthUser {
+interface AuthUser {
   id: string
   username: string
   email: string
   accessToken: string
 }
 
-export interface JwtPayload {
+interface JwtPayload {
   id: string
   username: string
   email: string
@@ -13,8 +13,12 @@ export interface JwtPayload {
   exp?: number
 }
 
-export interface JwtUser {
+interface JwtUser {
   id: string
   email: string
   username: string
 }
+
+export { AuthUser,
+  JwtUser,
+  JwtPayload };

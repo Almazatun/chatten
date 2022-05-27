@@ -1,10 +1,7 @@
 import { join } from "path";
 import { ConnectionOptions } from "typeorm";
 
-import { User } from "./users/entities/user.entity";
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-require("dotenv").config();
+import { User } from "./user/entities/user.entity";
 
 const entities = [
   User,

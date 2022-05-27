@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
-import { UsersModule } from "./users/users.module";
+import { UserModule } from "./user/user.module";
 import { ChatModule } from "./chat/chat.module";
 import { AuthModule } from "./auth/auth.module";
 import * as connectionOptions from "./ormconfig";
@@ -11,7 +11,7 @@ import * as connectionOptions from "./ormconfig";
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(connectionOptions),
-    UsersModule,
+    UserModule,
     ChatModule,
     AuthModule,
   ],

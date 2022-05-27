@@ -18,6 +18,10 @@ services:
 
   backend:
     container_name: ct_backend
+    environment:
+      - BASE_URL_UI=${BASE_URL_UI}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_EXPIRATION_TIME=${JWT_EXPIRATION_TIME}
     build:
       context: .
       dockerfile: ./dev.Dockerfile

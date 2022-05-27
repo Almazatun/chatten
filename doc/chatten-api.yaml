@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: 📟 Chatten API documentation
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/
+paths:
+  /auth/register:
+    $ref: './resources/auth.yaml#RegisterPath'
+  /auth/login:
+    $ref: './resources/auth.yaml#LogInPath'
+  /auth/me:
+    $ref: './resources/auth.yaml#AuthMePath'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

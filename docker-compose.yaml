@@ -33,6 +33,18 @@ services:
     depends_on:
       - postgres
 
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: ct_swagger_ui
+    profiles:
+      - swaggerapi
+    ports:
+      - "3002:8080"
+    volumes:
+      - ./doc:/usr/share/nginx/html/doc
+    environment:
+      URLS: "[{ url: \"doc/chatten-api.yaml\", name: \"📟  Chatten\" },]"
+
 volumes:
   postgres_db:
     driver: local

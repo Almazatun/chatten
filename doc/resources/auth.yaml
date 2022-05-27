@@ -1,0 +1,100 @@
+RegisterPath:
+  post:
+    tags:
+      - Auth
+    summary: Register user
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/definitions/RegisterUser'
+            example:
+              email: user@gmail.com
+              password: 1234567
+              username: username
+    security: []
+    responses:
+      '200':
+        description: Successfully register user with email:-->.
+      '4XX':
+        description: Bad request.
+      '5XX':
+        description: Unexpected error.
+LogInPath:
+  put:
+    tags:
+      - Auth
+    summary: Login user
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/definitions/LogInUser'
+            example:
+              email: user@gmail.com
+              password: 1234567
+    security: []
+    responses:
+      '200':
+        description: >
+          Successfully authenticated.
+          The session ID is returned in a cookie named `Token`. You need to include this cookie in subsequent requests.
+        content:
+          application/json: {
+            "id": uuid,
+            "email": "user@gmail.com",
+            "username": "text",
+            "accessToken": "alsdfjasdlkfjaskld",
+          }
+      '4XX':
+        description: Bad request.
+      '5XX':
+        description: Unexpected error.
+AuthMePath:
+  put:
+    tags:
+      - Auth
+    summary: Auth me
+    security:
+      - bearerAuth: []
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json: {
+          "id": uuid,
+          "email": "user@gmail.com",
+          "username": "text",
+        }
+      '4XX':
+        description: Message Unauthorized
+      '5XX':
+        description: Unexpected error.
+definitions:
+  RegisterUser:
+    type: object
+    required:
+      - email
+      - password
+      - username
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    xml:
+      name: "RegisterUser"
+  LogInUser:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    xml:
+      name: "LogInUser"

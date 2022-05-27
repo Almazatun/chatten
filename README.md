@@ -21,11 +21,14 @@ $ npm run start:prod
 ## Run app with docker-compose
 
 ```bash
-# Build and Up
+# build and up
 $ docker-compose up --build
 
-# Stop
+# stop
 $ docker-compose down
+
+# build and up with swagger ui
+$ docker-compose --profile swaggerapi up --build
 ```
 
 ## License

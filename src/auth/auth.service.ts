@@ -39,19 +39,20 @@ export class AuthService {
     return `User successfully registered with email:${email}`;
   }
 
-  public async validateUser(email: string, password: string): Promise<AuthUser | void> {
+  public async validateUser(
+    email: string,
+    password: string,
+  ): Promise<AuthUser | void> {
     const userDB = await this.userRepository.getByEmail(email);
 
-    if (userDB !== null && userDB !== undefined) {
-      const token = this.jwtService.sign(this.createJwtPayload(userDB));
-      const isMath = await bcrypt.compare(password, userDB.password);
-
-      if (userDB && isMath) {
+    if (this.isValidUser(userDB)) {
+      if (await this.isMathUserPassword(password, userDB)) {
+        const { id, username } = userDB;
         return {
-          id: userDB.id,
-          username: userDB.username,
+          id,
+          username,
           email,
-          accessToken: token,
+          accessToken: this.generateJwt(userDB),
         };
       }
       throw new BadRequestExc("User password incorrect");
@@ -63,7 +64,19 @@ export class AuthService {
     return bcrypt.hash(password, 12);
   }
 
-  private createJwtPayload(user: User): JwtPayload {
+  private isValidUser(user: User): boolean {
+    return user !== null && user !== undefined;
+  }
+
+  private isMathUserPassword(password: string, user: User): Promise<boolean> {
+    return bcrypt.compare(password, user.password);
+  }
+
+  private generateJwt(user: User): string {
+    return this.jwtService.sign(this.jwtPayload(user));
+  }
+
+  private jwtPayload(user: User): JwtPayload {
     const { id, username, email } = user;
     return { id, username, email };
   }

@@ -2,20 +2,20 @@
 ## Installation
 
 ```bash
-$ npm install
+$ make install
 ```
 
 ## Running the app
 
 ```bash
-# development
-$ npm run start
+# start
+$ make start
 
-# watch mode
-$ npm run start:dev
+# development
+$ make dev
 
 # production mode
-$ npm run start:prod
+$ make prod
 ```
 
 ## Run app with docker-compose

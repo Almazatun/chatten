@@ -2,9 +2,15 @@ import { join } from "path";
 import { ConnectionOptions } from "typeorm";
 
 import { User } from "./user/entities/user.entity";
+import { Message } from "./message/entities/message.entity";
+import { Group } from "./group/entities/group.entity";
+import { GroupMember } from "./group-member/entities/group-member.entity";
 
 const entities = [
   User,
+  Message,
+  Group,
+  GroupMember,
 ];
 
 const config = {

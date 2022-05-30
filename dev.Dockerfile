@@ -4,11 +4,15 @@ WORKDIR /home/node/app
 
 COPY package*.json ./
 
-RUN npm install
+COPY Makefile ./
+
+RUN apk update && apk add make
+
+RUN make install
 
 COPY . /home/node/app
 
-RUN npm run build
+RUN make build
 
 EXPOSE 3000
 

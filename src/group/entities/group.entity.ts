@@ -1,6 +1,8 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+
 import { Message } from "../../message/entities/message.entity";
 import { GroupMember } from "../../group-member/entities/group-member.entity";
+import { User } from "../../user/entities/user.entity";
 
 @Entity("groups")
 export class Group {
@@ -15,6 +17,12 @@ export class Group {
 
   @Column({ nullable: true })
   public updatedAt!: Date;
+
+  @Column({ nullable: false })
+  public userId!: string;
+
+  @ManyToOne(() => User, user => user.groups)
+  public user: User;
 
   @OneToMany(() => Message, message => message.user, {
     cascade: ["insert", "remove", "update"],

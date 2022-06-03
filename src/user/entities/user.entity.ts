@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 import { Message } from "../../message/entities/message.entity";
 import { GroupMember } from "../../group-member/entities/group-member.entity";
+import { Group } from "../../group/entities/group.entity";
 
 @Entity("users")
 export class User {
@@ -28,4 +29,7 @@ export class User {
 
   @OneToMany(() => GroupMember, groupMember => groupMember.user)
   public groupMembers: GroupMember[];
+
+  @OneToMany(() => Group, group => group.user)
+  public groups: Group[];
 }

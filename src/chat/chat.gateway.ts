@@ -5,7 +5,7 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from "@nestjs/websockets";
-import { Logger } from "@nestjs/common";
+import { Logger, UseGuards } from "@nestjs/common";
 import { Server, Socket } from "socket.io";
 
 import {
@@ -14,6 +14,7 @@ import {
   SOCKET_NAMESPACES,
 } from "../common/constant";
 import { CreateGroupInput, JoinGroupInput, LeaveFromGroupInput, MessageToGroupInput } from "./types";
+import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
 @WebSocketGateway({
   namespace: SOCKET_NAMESPACES.CHAT,
@@ -31,6 +32,7 @@ export class ChatGateway {
     this.logger.log("Connection Initialize");
   }
 
+  @UseGuards(JwtAuthGuard)
   @SubscribeMessage(SOCKET_EVENTS.SEND_MESSAGE)
   public async sendMessage(
     @MessageBody("messageToGroupInput") messageToGroupInput: MessageToGroupInput,
@@ -40,6 +42,7 @@ export class ChatGateway {
       .emit(SOCKET_EVENTS.SEND_MESSAGE, messageToGroupInput);
   }
 
+  @UseGuards(JwtAuthGuard)
   @SubscribeMessage(SOCKET_EVENTS.CREATE_GROUP)
   public async createGroup(
     @MessageBody("createGroupInput") createGroupInput: CreateGroupInput,
@@ -47,6 +50,7 @@ export class ChatGateway {
     this.wss.emit(SOCKET_EVENTS.CREATE_GROUP, createGroupInput.title);
   }
 
+  @UseGuards(JwtAuthGuard)
   @SubscribeMessage(SOCKET_EVENTS.JOIN_GROUP)
   public async joinGroup(
     @ConnectedSocket() client: Socket,
@@ -55,8 +59,9 @@ export class ChatGateway {
     this.wss.socketsJoin(joinGroupInput.groupId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @SubscribeMessage(SOCKET_EVENTS.LEAVE_GROUP)
-  public leaveRoom(
+  public leaveGroup(
     @ConnectedSocket() client: Socket,
     @MessageBody("leaveFromGroupInput") leaveFromGroupInput: LeaveFromGroupInput,
   ): void {

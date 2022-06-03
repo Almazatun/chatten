@@ -1,0 +1,27 @@
+type: object
+properties:
+  id:
+    type: string
+  title:
+    type: string
+  createdAt:
+    type:
+      - string
+      - 'null'
+  updatedAt:
+    type:
+      - string
+      - 'null'
+  userId:
+    type: string
+  user:
+    type: object
+      $ref: './user.schema.yaml'
+  messages:
+    type: array
+    items:
+      $ref: './message.schema.yaml'
+  groupMembers:
+    type: [ 'null', object ]
+
+

@@ -1,0 +1,24 @@
+type: object
+properties:
+  id:
+    type: string
+  text:
+    type: string
+  createdAt:
+    type:
+      - string
+      - 'null'
+  updatedAt:
+    type:
+      - string
+      - 'null'
+  userId:
+    type: string
+  groupId:
+    type: string
+  user:
+    type: object
+      $ref: './user.schema.yaml'
+  group:
+    type: object
+      $ref: './group.schema.yaml'

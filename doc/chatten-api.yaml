@@ -11,6 +11,8 @@ paths:
     $ref: './resources/auth.yaml#LogInPath'
   /auth/me:
     $ref: './resources/auth.yaml#AuthMePath'
+  /groups/{userId}:
+    $ref: './resources/group.yaml#CreatePath'
 
 components:
   securitySchemes:

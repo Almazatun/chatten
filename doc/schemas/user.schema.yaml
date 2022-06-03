@@ -1,0 +1,15 @@
+type: object
+properties:
+  id:
+    type: string
+  username:
+    type: string
+  createdAt:
+    type:
+      - string
+      - 'null'
+  updatedAt:
+    type:
+      - string
+      - 'null'
+

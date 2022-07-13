@@ -9,10 +9,12 @@ import { LocalStrategy } from "./strategies/local.strategy";
 import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard";
 import { UserModule } from "../user/user.module";
+import { MailModule } from "../mail/mail.module";
 
 @Module({
   imports: [
     UserModule,
+    MailModule,
     PassportModule.register({}),
     JwtModule.register({
       secret: process.env.JWT_SECRET_KEY as string,

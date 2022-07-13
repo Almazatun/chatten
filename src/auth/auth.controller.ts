@@ -17,6 +17,11 @@ export class AuthController {
     return this.authService.registerUser(registerUserDto);
   }
 
+  @Post("confirm")
+  public confirm(@Body("token") token: string): Promise<string> {
+    return this.authService.confirmUserEmail(token);
+  }
+
   @UseGuards(LocalAuthGuard)
   @Put("login")
   public async login(@Request() req):Promise<AuthUser> {

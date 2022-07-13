@@ -19,6 +19,13 @@ interface JwtUser {
   username: string
 }
 
+interface VerificationPayload {
+  email: string
+  password: string
+  username: string
+}
+
 export { AuthUser,
   JwtUser,
-  JwtPayload };
+  JwtPayload,
+  VerificationPayload };

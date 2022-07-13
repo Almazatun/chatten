@@ -22,13 +22,13 @@ $ make prod
 
 ```bash
 # build and up
-$ docker-compose up --build
+$ make compose-up
 
 # stop
-$ docker-compose down
+$ make compose-down
 
 # build and up with swagger ui
-$ docker-compose --profile swaggerapi up --build
+$ make compose-up-swagger
 ```
 
 ## License

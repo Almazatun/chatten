@@ -7,6 +7,8 @@ services:
       context: ./src/database
       dockerfile: ./Dockerfile
     restart: always
+    env_file:
+      - .env
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -18,10 +20,18 @@ services:
 
   backend:
     container_name: ct_backend
+    env_file:
+      - .env
     environment:
       - BASE_URL_UI=${BASE_URL_UI}
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
       - JWT_EXPIRATION_TIME=${JWT_EXPIRATION_TIME}
+      - JWT_VERIFICATION_TOKEN_SECRET=${JWT_VERIFICATION_TOKEN_SECRET}
+      - JWT_VERIFICATION_TOKEN_EXPIRATION_TIME=${JWT_VERIFICATION_TOKEN_EXPIRATION_TIME}
+      - SMTP_MAIL_LOGIN=${SMTP_MAIL_LOGIN}
+      - SMTP_MAIL_PASSWORD=${SMTP_MAIL_PASSWORD}
+      - SMTP_MAIL_HOST=${SMTP_MAIL_HOST}
+      - SMTP_MAIL_PORT=${SMTP_MAIL_PORT}
     build:
       context: .
       dockerfile: ./dev.Dockerfile

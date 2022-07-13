@@ -8,6 +8,7 @@ import { AuthModule } from "./auth/auth.module";
 import { GroupModule } from "./group/group.module";
 import { MessageModule } from "./message/message.module";
 import { GroupMemberModule } from "./group-member/group-member.module";
+import { MailModule } from "./mail/mail.module";
 import * as connectionOptions from "./ormconfig";
 
 @Module({
@@ -20,6 +21,7 @@ import * as connectionOptions from "./ormconfig";
     GroupModule,
     MessageModule,
     GroupMemberModule,
+    MailModule,
   ],
   controllers: [],
   providers: [],

@@ -26,4 +26,8 @@ export class GroupService {
 
     return this.groupRepository.save(groupTypeDB);
   }
+
+  // public async findGroupByTitle(): P {
+  //
+  // }
 }

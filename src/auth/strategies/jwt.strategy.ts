@@ -1,7 +1,7 @@
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { PassportStrategy } from "@nestjs/passport";
-
 import { Injectable } from "@nestjs/common";
+
 import { JwtPayload, JwtUser } from "../types";
 // eslint-disable-next-line import/no-extraneous-dependencies
 require("dotenv").config();

@@ -1,18 +1,22 @@
 import { NestFactory } from "@nestjs/core";
 import { ValidationPipe } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 
 import { AppModule } from "./app.module";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors({
     origin: [
-      process.env.BASE_URL_UI,
-      process.env.SWAGGER_API,
+      configService.get<string>("baseUrl"),
+      configService.get<string>("swaggerApi"),
     ],
     credentials: true,
   });
-  await app.listen(+process.env.PORT || 3000);
+
+  await app.listen(configService.get<number>("appPort"));
 }
 bootstrap();

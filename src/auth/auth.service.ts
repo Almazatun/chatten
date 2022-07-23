@@ -2,6 +2,7 @@ import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { plainToClass } from "class-transformer";
 import * as bcrypt from "bcrypt";
+import { ConfigService } from "@nestjs/config";
 
 import { BadRequestExc } from "../common/exceptions/bad-request.exception";
 import { NotFoundExc } from "../common/exceptions/not-found.exception";
@@ -18,12 +19,13 @@ export class AuthService {
     private userRepository: UserRepo,
     private jwtService: JwtService,
     private mailService: MailService,
+    private configService: ConfigService,
   ) {}
 
   public async registerUser(registerUserDto: RegisterUserDto): Promise<string> {
     const token = this.jwtService.sign(registerUserDto, {
-      secret: process.env.JWT_VERIFICATION_TOKEN_SECRET,
-      expiresIn: process.env.JWT_VERIFICATION_TOKEN_EXPIRATION_TIME,
+      secret: this.configService.get<string>("jwtVerificationTokenSecret"),
+      expiresIn: this.configService.get<string>("jwtVerificationTokenExpirationTime"),
     });
 
     await this.mailService.sendUserConfirmation(registerUserDto.email, token);

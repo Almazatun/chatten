@@ -12,6 +12,9 @@ export class Group {
   @Column()
   public title!: string;
 
+  @Column()
+  public isPrivate!: boolean;
+
   @Column({ nullable: true })
   public createdAt!: Date;
 

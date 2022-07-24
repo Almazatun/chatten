@@ -16,7 +16,26 @@ export class GroupRepo {
   }
 
   public async get(id: string): Promise<Group> {
-    return this.groupRepo.findOne(id);
+    return this.groupRepo.findOne(id, {
+      relations: ["messages"],
+    });
+  }
+
+  public async listByTitleForSearch(title: string): Promise<Group[]> {
+    return this.groupRepo.find({
+      where: {
+        title,
+        isPrivate: false,
+      },
+    });
+  }
+
+  public async listByUserId(userId: string): Promise<Group[]> {
+    return this.groupRepo.find({
+      where: {
+        userId,
+      },
+    });
   }
 
   public async remove(group: Group): Promise<Group> {
